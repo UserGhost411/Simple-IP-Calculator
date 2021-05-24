@@ -25,7 +25,7 @@ def SubnetAll(a,ip):
     all = []
     a = DecimaltoSubnet(a)
     to = (256-int(a[3]))
-    ip1to3 = ip.split(".")[0]+"."+ip.split(".")[1]+"."+ip.split(".")[2]+".";
+    ip1to3 = ip[0]+"."+ip[1]+"."+ip[2]+".";
     for i in range(0,255,to):
         all.append([ip1to3+str(i) ,ip1to3+str(i+1) , ip1to3+str(i+to-2) ,ip1to3+str(i+to-1)])
     return all;
@@ -48,8 +48,8 @@ def DecimaltoSubnetBiner(a):
             a-=1
             subnet.append(str(data))
         subnet.append('.')
-    return ("".join(subnet))[:-1]
-print("{:=>38}{:=<38}\n{:>38}{:<38}\n".format("IP Cal","culator","By User","Ghost411"))
+    return subnet
+print("{:=>38}{:=<38}\n{:>38}{:<38}\n{:>38}{:<38}\n".format("IP Cal","culator","By User","Ghost411","https://github.com/UserGh","ost411/Simple-IP-Calculator"))
 ip = str(input("masukan alamat IPV4:") or '192.168.1.1')
 prefix = int(input("masukan Prefix ({}/x):".format(ip)) or 24)
 ipbiner = ''
@@ -62,9 +62,9 @@ for x in ipbiner[0:-1].split("."):
 print("\n{:12}: {:35}".format("IP Biner",ipbiner[0:-1]))
 print("{:12}: {:8}.{:8}.{:8}.{:8}".format("IP Decimal",ipdeci[0],ipdeci[1],ipdeci[2],ipdeci[3]))
 print("{:12}: {:35}".format("IP Class",IPClass(ipdeci[0])))
-print("{:12}: {:35}".format("Subnet Biner",DecimaltoSubnetBiner(prefix)))
+print("{:12}: {:35}".format("Subnet Biner",("".join(DecimaltoSubnetBiner(prefix)))[:-1]))
 print("{:12}: {:8}.{:8}.{:8}.{:8}".format("Subnet Mask",subnet[0],subnet[1],subnet[2],subnet[3]))
 print("Subnet Range:")
 print("| {:16} | {:35} | {:16}|".format("Network","Usable Host Range","Broadcast"))
-for a in SubnetAll(prefix,"{}.{}.{}.{}".format(ipdeci[0],ipdeci[1],ipdeci[2],ipdeci[3])):
+for a in SubnetAll(prefix,ipdeci):
     print("| {:16} | {:16} - {:16} | {:16}|".format(a[0],a[1],a[2],a[3]))
