@@ -154,6 +154,7 @@ function RangeNetworkClass(prefix, classip, ip, totalnetwork) {
 		indexOctet = 0
 	}
 
+	// make the first ip to be 0.0.0.0 based on class ip for sorted results
 	for (let index = 0; index < temp_address.length; index++) {
 		if (index >= indexOctet) {
 			temp_address[index] = 0
